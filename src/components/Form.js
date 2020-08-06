@@ -9,7 +9,12 @@ const Form = () => {
   const [genre, setGenre] = useState(undefined);
 
   const onSubmit = () => {
-    console.log([valence, instrumentalness, genre]);
+    if (genre) {
+      console.log([valence, instrumentalness, genre]);
+    } else {
+      //setError to "pick a genre/artist/track ya twat"
+      console.log('You need a genre mate');
+    }
   };
 
   return (
