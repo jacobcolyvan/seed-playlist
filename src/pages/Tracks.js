@@ -7,7 +7,11 @@ const Tracks = ({ tracks }) => {
     if (!tracks) {
       history.push('/');
     }
-  }, [history]);
+  }, [history, tracks]);
+
+  // useEffect(() => {
+  //   console.log(tracks);
+  // }, [tracks]);
 
   return (
     <div>

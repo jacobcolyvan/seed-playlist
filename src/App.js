@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useHistory } from 'react';
+import React, { useState } from 'react';
 import Home from './pages/Home';
 import Tracks from './pages/Tracks';
 import { Container } from '@material-ui/core';
@@ -14,7 +14,7 @@ import {
 } from 'react-router-dom';
 
 const App = (props) => {
-  const [showForm, setShowForm] = useState(true);
+  // const [showForm, setShowForm] = useState(true);
   const [tracks, setTracks] = useState(undefined);
   const [token, setToken] = useState(undefined);
 

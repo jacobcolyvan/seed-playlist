@@ -10,6 +10,10 @@ const SpotifyAuth = () => {
   return (
     <div>
       <p>
+        You'll want to authorise spotify before you can start generating
+        playlists.
+      </p>
+      <p>
         <a
           href={`https://accounts.spotify.com/authorize?response_type=token&client_id=${
             process.env.REACT_APP_SPOTIFY_CLIENT_ID2
