@@ -14,7 +14,6 @@ const Home = ({ setTracks, tracks, token, setToken, location }) => {
   }, [setToken, history, location.hash]);
 
   useEffect(() => {
-    console.log('gg');
     if (tracks) {
       history.push('/recs');
     }
@@ -28,7 +27,6 @@ const Home = ({ setTracks, tracks, token, setToken, location }) => {
       ) : (
         <SpotifyAuth />
       )}
-      {tracks}
     </div>
   );
 };

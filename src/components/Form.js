@@ -5,26 +5,11 @@ import Button from '@material-ui/core/Button';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 
-const Form = ({ setTracks, token, tracks }) => {
+const Form = ({ setTracks, token }) => {
   const history = useHistory();
 
-  const [instrumentalness, setInstrumentalness] = useState(undefined);
-  const [valence, setValence] = useState(undefined);
-  const [acousticness, setAcousticness] = useState(undefined);
-  const [danceability, setDanceability] = useState(undefined);
-  const [energy, setEnergy] = useState(undefined);
-  const [liveness, setLiveness] = useState(undefined);
-  const [loudness, setLoudness] = useState(undefined);
-  const [mode, setMode] = useState(undefined);
-  const [popularity, setPopularity] = useState(undefined);
-  const [tempo, setTempo] = useState(undefined);
-  const [key, setKey] = useState(undefined);
-
   const [genre, setGenre] = useState(undefined);
-
   const [activeParams, setActiveParams] = useState([]);
-  // const activeParams = {};
-  // const url =
 
   const getRecommendedTracks = async () => {
     try {
@@ -57,7 +42,6 @@ const Form = ({ setTracks, token, tracks }) => {
 
   const onSubmit = async () => {
     if (genre) {
-      console.log([valence, instrumentalness, genre]);
       await getRecommendedTracks();
     } else {
       //setError to "pick a genre/artist/track ya twat"
@@ -66,12 +50,13 @@ const Form = ({ setTracks, token, tracks }) => {
   };
 
   const saveActiveParam = (param_name, value) => {
-    if (value >= 0 && value <= 1) {
-      let tempList = activeParams;
-      tempList[param_name] = value;
+    let tempList = activeParams;
 
+    if (!value) {
+      delete tempList[param_name];
+    } else if (value >= 0 && value <= 1) {
+      tempList[param_name] = value;
       setActiveParams(tempList);
-      console.log(activeParams);
     }
   };
 
@@ -79,10 +64,12 @@ const Form = ({ setTracks, token, tracks }) => {
     let url = `https://api.spotify.com/v1/recommendations?market=AU&seed_genres=${genre.join(
       ','
     )}`;
+
     console.log(activeParams);
     Object.keys(activeParams).forEach((param) => {
       url += `&target_${param}=${activeParams[param]}`;
     });
+
     console.log(url);
     return url;
   };
@@ -90,31 +77,24 @@ const Form = ({ setTracks, token, tracks }) => {
   return (
     <div>
       <form>
-        <Input
-          title='instrumentalness'
-          setValue={setInstrumentalness}
-          saveParam={saveActiveParam}
-          value={instrumentalness}
-        />
-        <Input
-          title='valence'
-          setValue={setValence}
-          saveParam={saveActiveParam}
-          value={valence}
-        />
-        <Input
-          title='acousticness'
-          setValue={setAcousticness}
-          saveParam={saveActiveParam}
-          value={acousticness}
-        />
-        {/* <Input title='Valence' setValue={setValence} />
-        <Input title='Valence' setValue={setValence} />
-        <Input title='Valence' setValue={setValence} /> */}
-
         <GenreSelect genre={genre} setGenre={setGenre} />
+        <Input title='instrumentalness' saveParam={saveActiveParam} />
+        <Input title='valence' saveParam={saveActiveParam} />
+        <Input title='acousticness' saveParam={saveActiveParam} />
+        <Input title='dancebility' saveParam={saveActiveParam} />
+        <Input title='energy' saveParam={saveActiveParam} />
+        <Input title='liveness' saveParam={saveActiveParam} />
+        <Input title='popularity' saveParam={saveActiveParam} />
+        <Input title='speechiness' saveParam={saveActiveParam} />
 
-        <br />
+        {/* <Input title='loudness' saveParam={saveActiveParam} /> */}
+        {/* <Input title='tempo' saveParam={saveActiveParam} /> */}
+        {/* mode needs to be 1 or 0; key needs to be between 0 and 11 */}
+        {/* <Input title='key' saveParam={saveActiveParam} /> */}
+        {/* <Input title='mode' saveParam={saveActiveParam} /> */}
+
+        <br></br>
+        <br></br>
         <Button variant='outlined' color='primary' fullWidth onClick={onSubmit}>
           Generate
         </Button>

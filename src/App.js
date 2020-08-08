@@ -14,7 +14,6 @@ import {
 } from 'react-router-dom';
 
 const App = (props) => {
-  // const [showForm, setShowForm] = useState(true);
   const [tracks, setTracks] = useState(undefined);
   const [token, setToken] = useState(undefined);
 
@@ -40,7 +39,7 @@ const App = (props) => {
               <Route
                 exact
                 path='/recs'
-                render={() => <Tracks tracks={tracks} />}
+                render={() => <Tracks tracks={tracks} token={token} />}
               />
 
               <Redirect to='/' />
