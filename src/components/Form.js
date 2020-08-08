@@ -7,15 +7,32 @@ import { useHistory } from 'react-router-dom';
 
 const Form = ({ setTracks, token, tracks }) => {
   const history = useHistory();
+
   const [instrumentalness, setInstrumentalness] = useState(undefined);
   const [valence, setValence] = useState(undefined);
+  const [acousticness, setAcousticness] = useState(undefined);
+  const [danceability, setDanceability] = useState(undefined);
+  const [energy, setEnergy] = useState(undefined);
+  const [liveness, setLiveness] = useState(undefined);
+  const [loudness, setLoudness] = useState(undefined);
+  const [mode, setMode] = useState(undefined);
+  const [popularity, setPopularity] = useState(undefined);
+  const [tempo, setTempo] = useState(undefined);
+  const [key, setKey] = useState(undefined);
+
   const [genre, setGenre] = useState(undefined);
+
+  const [activeParams, setActiveParams] = useState([]);
+  // const activeParams = {};
+  // const url =
 
   const getRecommendedTracks = async () => {
     try {
+      const url = generateUrl();
+
       axios({
         method: 'get',
-        url: `https://api.spotify.com/v1/recommendations?market=AU&seed_genres=${genre}`,
+        url: url,
         headers: {
           Authorization: 'Bearer ' + token,
           'Content-Type': 'application/json'
@@ -32,11 +49,6 @@ const Form = ({ setTracks, token, tracks }) => {
           setTracks(trackInfo);
         })
         .then(() => history.push('/recs'));
-
-      // creates and sets the track recommendation arrays
-      // const trackIds = trackRecs.data.tracks.map(
-      //   (track) => `spotify:track:${track.id}`
-      // );
     } catch (err) {
       console.log(err.message);
       console.log('There was an error getting recommended tracks');
@@ -53,12 +65,53 @@ const Form = ({ setTracks, token, tracks }) => {
     }
   };
 
+  const saveActiveParam = (param_name, value) => {
+    if (value >= 0 && value <= 1) {
+      let tempList = activeParams;
+      tempList[param_name] = value;
+
+      setActiveParams(tempList);
+      console.log(activeParams);
+    }
+  };
+
+  const generateUrl = () => {
+    let url = `https://api.spotify.com/v1/recommendations?market=AU&seed_genres=${genre.join(
+      ','
+    )}`;
+    console.log(activeParams);
+    Object.keys(activeParams).forEach((param) => {
+      url += `&target_${param}=${activeParams[param]}`;
+    });
+    console.log(url);
+    return url;
+  };
+
   return (
     <div>
-      <p>{genre || 'no genre'}</p>
       <form>
-        <Input title='Instrumentalness' setValue={setInstrumentalness} />
+        <Input
+          title='instrumentalness'
+          setValue={setInstrumentalness}
+          saveParam={saveActiveParam}
+          value={instrumentalness}
+        />
+        <Input
+          title='valence'
+          setValue={setValence}
+          saveParam={saveActiveParam}
+          value={valence}
+        />
+        <Input
+          title='acousticness'
+          setValue={setAcousticness}
+          saveParam={saveActiveParam}
+          value={acousticness}
+        />
+        {/* <Input title='Valence' setValue={setValence} />
         <Input title='Valence' setValue={setValence} />
+        <Input title='Valence' setValue={setValence} /> */}
+
         <GenreSelect genre={genre} setGenre={setGenre} />
 
         <br />

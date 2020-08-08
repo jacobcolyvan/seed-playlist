@@ -16,8 +16,9 @@ const GenreSelect = ({ setGenre }) => {
           setGenre(newValue);
         }}
         renderInput={(params) => (
-          <TextField {...params} label='Genre' variant='outlined' />
+          <TextField {...params} label='genre' variant='outlined' />
         )}
+        multiple
       />
     </div>
   );

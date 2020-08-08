@@ -4,3 +4,9 @@
 
   font-family: 'Roboto';
 }
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0;
+}
