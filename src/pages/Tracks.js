@@ -42,13 +42,17 @@ const Tracks = ({ tracks, token }) => {
       }
     });
 
-    return spotifyRes.data.id;
+    const id = spotifyRes.data.id;
+    const link = spotifyRes.data.external_urls.spotify
+
+    return [id, link];
   };
 
   const savePlaylist = async () => {
     try {
-      const playlistId = await createEmptyPlaylist();
-      await addTracksToPlaylist(playlistId);
+      const playlistInfo = await createEmptyPlaylist();
+      await addTracksToPlaylist(playlistInfo[0]);
+      window.open(playlistInfo[1],'_blank');
       console.log('playlist created');
     } catch (err) {
       console.log(err.message);
@@ -79,7 +83,7 @@ const Tracks = ({ tracks, token }) => {
             color='primary'
             fullWidth
             onClick={savePlaylist}
-            style={{ margin: '2px 0' }}
+            // style={{ margin: '2px 0' }}
           >
             Save Playlist
           </Button>
@@ -88,7 +92,7 @@ const Tracks = ({ tracks, token }) => {
             color='secondary'
             fullWidth
             onClick={goBackToForm}
-            style={{ margin: '2px  0' }}
+            // style={{ margin: '2px  0' }}
           >
               New Reccomendations (go back)
           </Button>
