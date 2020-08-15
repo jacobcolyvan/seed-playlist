@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Input from './Input';
-import InputSeed from './InputSeed'
+import InputSeed from './InputSeed';
 import GenreSelect from './GenreSelect';
 import Button from '@material-ui/core/Button';
 import axios from 'axios';
@@ -36,15 +36,18 @@ const Form = ({ setTracks, token }) => {
           console.log(trackInfo);
           setTracks(trackInfo);
         })
-        .then(() => history.push('/recs'));
+        .then(() => history.push('/recs'))
+        .catch((err) => {
+          console.log(err.message);
+          console.log('There was an error getting recommended tracks');
+        });
     } catch (err) {
       console.log(err.message);
-      console.log('There was an error getting recommended tracks');
     }
   };
 
   const onSubmit = async () => {
-    if (genre) {
+    if (genre || artistSeed || trackSeed) {
       await getRecommendedTracks();
     } else {
       //setError to "pick a genre/artist/track ya twat"
@@ -64,19 +67,18 @@ const Form = ({ setTracks, token }) => {
   };
 
   const generateUrl = () => {
-    let url = `https://api.spotify.com/v1/recommendations?market=AU&seed_genres=${genre.join(
-      ','
-    )}`;
+    let url = `https://api.spotify.com/v1/recommendations?market=AU`;
 
+    if (genre) url += `&seed_genres=${genre.join(',')}`;
     if (artistSeed) url += `&seed_artists=${artistSeed}`;
     if (trackSeed) url += `&seed_artists=${artistSeed}`;
 
-    console.log(activeParams);
+    // console.log(activeParams);
     Object.keys(activeParams).forEach((param) => {
       url += `&target_${param}=${activeParams[param]}`;
     });
 
-    console.log(url);
+    // console.log(url);
     return url;
   };
 
@@ -84,18 +86,19 @@ const Form = ({ setTracks, token }) => {
     <div>
       <form>
         <GenreSelect genre={genre} setGenre={setGenre} />
-        <Input title='instrumentalness' saveParam={saveActiveParam} limit={1}/>
-        <Input title='valence' saveParam={saveActiveParam} limit={1}/>
-        <Input title='acousticness' saveParam={saveActiveParam} limit={1}/>
-        <Input title='dancebility' saveParam={saveActiveParam} limit={1}/>
-        <Input title='energy' saveParam={saveActiveParam} limit={1}/>
-        <Input title='liveness' saveParam={saveActiveParam} limit={1}/>
-        <Input title='speechiness' saveParam={saveActiveParam} limit={1}/>
-        <Input title='popularity' saveParam={saveActiveParam} limit={100}/>
-        <Input title='tempo' saveParam={saveActiveParam}limit={200} />
-        <Input title='key' saveParam={saveActiveParam} limit={11}/>
+        <Input title='instrumentalness' saveParam={saveActiveParam} limit={1} />
+        <Input title='valence' saveParam={saveActiveParam} limit={1} />
+        <Input title='acousticness' saveParam={saveActiveParam} limit={1} />
+        <Input title='dancebility' saveParam={saveActiveParam} limit={1} />
+        <Input title='energy' saveParam={saveActiveParam} limit={1} />
+        <Input title='liveness' saveParam={saveActiveParam} limit={1} />
+        <Input title='speechiness' saveParam={saveActiveParam} limit={1} />
+        <Input title='popularity' saveParam={saveActiveParam} limit={100} />
+        <Input title='tempo' saveParam={saveActiveParam} limit={200} />
+        <Input title='key' saveParam={saveActiveParam} limit={11} />
 
-        <br /><br />
+        <br />
+        <br />
         <InputSeed title='artist id' setSeed={setArtistSeed} />
         <InputSeed title='track id' setSeed={setTrackSeed} />
 

@@ -1,10 +1,12 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import Button from '@material-ui/core/Button';
 
 const Tracks = ({ tracks, token }) => {
   const history = useHistory();
+  const [playlistSaved, setPlaylistSaved] = useState(false)
+  const [playlistId, setPlaylistId] = useState(undefined);
 
   useEffect(() => {
     if (!tracks) {
@@ -14,8 +16,6 @@ const Tracks = ({ tracks, token }) => {
 
   const addTracksToPlaylist = async (playlistId) => {
     const trackIds = tracks.map((track) => `spotify:track:${track[3]}`);
-    console.log(trackIds);
-    console.log(token);
 
     await axios({
       method: 'post',
@@ -42,8 +42,10 @@ const Tracks = ({ tracks, token }) => {
       }
     });
 
-    const id = spotifyRes.data.id;
+    
+    const id = spotifyRes.data.id
     const link = spotifyRes.data.external_urls.spotify
+    setPlaylistId(id);
 
     return [id, link];
   };
@@ -52,12 +54,30 @@ const Tracks = ({ tracks, token }) => {
     try {
       const playlistInfo = await createEmptyPlaylist();
       await addTracksToPlaylist(playlistInfo[0]);
+      setPlaylistSaved(true)
       window.open(playlistInfo[1],'_blank');
       console.log('playlist created');
     } catch (err) {
       console.log(err.message);
     }
   };
+
+  const deletePlaylist = async () => {
+    try {
+      await axios({
+        method: 'delete',
+        url: `https://api.spotify.com/v1/playlists/${playlistId}/followers`,
+        headers: {
+          Authorization: 'Bearer ' + token
+        },
+      })
+      setPlaylistSaved(false)
+      console.log('playlist deleted');
+    } catch (err) {
+      console.log(err.message);
+
+    }
+  }
 
   const goBackToForm = () => {
     history.push('/')
@@ -83,16 +103,28 @@ const Tracks = ({ tracks, token }) => {
             color='primary'
             fullWidth
             onClick={savePlaylist}
+            disabled={playlistSaved}
             // style={{ margin: '2px 0' }}
           >
             Save Playlist
+          </Button>
+
+          <Button
+            variant='outlined'
+            color='primary'
+            fullWidth
+            onClick={deletePlaylist}
+            disabled={!playlistSaved}
+            // style={{ margin: '2px 0' }}
+          >
+            Delete Playlist
           </Button>
 
           <Button variant='outlined'
             color='secondary'
             fullWidth
             onClick={goBackToForm}
-            // style={{ margin: '2px  0' }}
+            style={{ margin: '6px  0' }}
           >
               New Reccomendations (go back)
           </Button>
