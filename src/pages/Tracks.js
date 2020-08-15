@@ -55,6 +55,10 @@ const Tracks = ({ tracks, token }) => {
     }
   };
 
+  const goBackToForm = () => {
+    history.push('/')
+  }
+
   return (
     <div>
       <h1>Show Tracks</h1>
@@ -62,19 +66,31 @@ const Tracks = ({ tracks, token }) => {
         <>
           <ul className='recommended-tracks'>
             {tracks.map((track, index) => (
-              <li key={`track${index}`}>
+              <li className='track' key={`track${index}`}>
                 {track[1]}: <i>{track[0]}</i>
+                {/* put play button here */}
               </li>
             ))}
           </ul>
-
+          
+          <br/>
           <Button
             variant='outlined'
             color='primary'
             fullWidth
             onClick={savePlaylist}
+            style={{ margin: '2px 0' }}
           >
             Save Playlist
+          </Button>
+
+          <Button variant='outlined'
+            color='secondary'
+            fullWidth
+            onClick={goBackToForm}
+            style={{ margin: '2px  0' }}
+          >
+              New Reccomendations (go back)
           </Button>
         </>
       )}

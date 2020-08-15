@@ -90,8 +90,8 @@ const Form = ({ setTracks, token }) => {
         <Input title='dancebility' saveParam={saveActiveParam} limit={1}/>
         <Input title='energy' saveParam={saveActiveParam} limit={1}/>
         <Input title='liveness' saveParam={saveActiveParam} limit={1}/>
-        <Input title='popularity' saveParam={saveActiveParam} limit={1}/>
         <Input title='speechiness' saveParam={saveActiveParam} limit={1}/>
+        <Input title='popularity' saveParam={saveActiveParam} limit={100}/>
         <Input title='tempo' saveParam={saveActiveParam}limit={200} />
         <Input title='key' saveParam={saveActiveParam} limit={11}/>
 
