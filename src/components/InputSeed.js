@@ -1,23 +1,21 @@
 import React from 'react';
 import TextField from '@material-ui/core/TextField';
 
-const Input = ({ title, saveParam }) => {
+const InputSeed = ({ title, setSeed }) => {
   return (
     <div>
       <br />
       <TextField
         fullWidth
         label={title}
-        type='number'
+        type='string'
         onChange={(e) => {
-          saveParam(title, e.target.value);
+          setSeed(e.target.value);
         }}
         style={{ flex: 1, margin: '0 20px 0 0', color: 'white' }}
-        min='0'
-        max='1'
       />
     </div>
   );
 };
 
-export default Input;
+export default InputSeed;

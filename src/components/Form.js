@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Input from './Input';
+import InputSeed from './InputSeed'
 import GenreSelect from './GenreSelect';
 import Button from '@material-ui/core/Button';
 import axios from 'axios';
@@ -9,6 +10,8 @@ const Form = ({ setTracks, token }) => {
   const history = useHistory();
 
   const [genre, setGenre] = useState(undefined);
+  const [artistSeed, setArtistSeed] = useState(undefined);
+  const [trackSeed, setTrackSeed] = useState(undefined);
   const [activeParams, setActiveParams] = useState([]);
 
   const getRecommendedTracks = async () => {
@@ -65,6 +68,9 @@ const Form = ({ setTracks, token }) => {
       ','
     )}`;
 
+    if (artistSeed) url += `&seed_artists=${artistSeed}`;
+    if (trackSeed) url += `&seed_artists=${artistSeed}`;
+
     console.log(activeParams);
     Object.keys(activeParams).forEach((param) => {
       url += `&target_${param}=${activeParams[param]}`;
@@ -86,6 +92,10 @@ const Form = ({ setTracks, token }) => {
         <Input title='liveness' saveParam={saveActiveParam} />
         <Input title='popularity' saveParam={saveActiveParam} />
         <Input title='speechiness' saveParam={saveActiveParam} />
+
+        <br /><br />
+        <InputSeed title='artist id' setSeed={setArtistSeed} />
+        <InputSeed title='track id' setSeed={setTrackSeed} />
 
         {/* <Input title='loudness' saveParam={saveActiveParam} /> */}
         {/* <Input title='tempo' saveParam={saveActiveParam} /> */}
