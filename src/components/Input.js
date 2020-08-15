@@ -1,7 +1,7 @@
 import React from 'react';
 import TextField from '@material-ui/core/TextField';
 
-const Input = ({ title, saveParam }) => {
+const Input = ({ title, saveParam, limit }) => {
   return (
     <div>
       <br />
@@ -10,7 +10,7 @@ const Input = ({ title, saveParam }) => {
         label={title}
         type='number'
         onChange={(e) => {
-          saveParam(title, e.target.value);
+          saveParam(title, e.target.value, limit);
         }}
         style={{ flex: 1, margin: '0 20px 0 0', color: 'white' }}
         min='0'

@@ -52,12 +52,12 @@ const Form = ({ setTracks, token }) => {
     }
   };
 
-  const saveActiveParam = (param_name, value) => {
+  const saveActiveParam = (param_name, value, limit) => {
     let tempList = activeParams;
 
     if (!value) {
       delete tempList[param_name];
-    } else if (value >= 0 && value <= 1) {
+    } else if (value >= 0 && value <= limit) {
       tempList[param_name] = value;
       setActiveParams(tempList);
     }
@@ -84,24 +84,24 @@ const Form = ({ setTracks, token }) => {
     <div>
       <form>
         <GenreSelect genre={genre} setGenre={setGenre} />
-        <Input title='instrumentalness' saveParam={saveActiveParam} />
-        <Input title='valence' saveParam={saveActiveParam} />
-        <Input title='acousticness' saveParam={saveActiveParam} />
-        <Input title='dancebility' saveParam={saveActiveParam} />
-        <Input title='energy' saveParam={saveActiveParam} />
-        <Input title='liveness' saveParam={saveActiveParam} />
-        <Input title='popularity' saveParam={saveActiveParam} />
-        <Input title='speechiness' saveParam={saveActiveParam} />
+        <Input title='instrumentalness' saveParam={saveActiveParam} limit={1}/>
+        <Input title='valence' saveParam={saveActiveParam} limit={1}/>
+        <Input title='acousticness' saveParam={saveActiveParam} limit={1}/>
+        <Input title='dancebility' saveParam={saveActiveParam} limit={1}/>
+        <Input title='energy' saveParam={saveActiveParam} limit={1}/>
+        <Input title='liveness' saveParam={saveActiveParam} limit={1}/>
+        <Input title='popularity' saveParam={saveActiveParam} limit={1}/>
+        <Input title='speechiness' saveParam={saveActiveParam} limit={1}/>
+        <Input title='tempo' saveParam={saveActiveParam}limit={200} />
+        <Input title='key' saveParam={saveActiveParam} limit={11}/>
 
         <br /><br />
         <InputSeed title='artist id' setSeed={setArtistSeed} />
         <InputSeed title='track id' setSeed={setTrackSeed} />
 
-        {/* <Input title='loudness' saveParam={saveActiveParam} /> */}
-        {/* <Input title='tempo' saveParam={saveActiveParam} /> */}
-        {/* mode needs to be 1 or 0; key needs to be between 0 and 11 */}
-        {/* <Input title='key' saveParam={saveActiveParam} /> */}
-        {/* <Input title='mode' saveParam={saveActiveParam} /> */}
+        {/* loudness -60 - 0; mode = 0 or 1 */}
+        {/* <Input title='loudness' saveParam={saveActiveParam} limit={1}/> */}
+        {/* <Input title='mode' saveParam={saveActiveParam} limit={1}/> */}
 
         <br></br>
         <br></br>
