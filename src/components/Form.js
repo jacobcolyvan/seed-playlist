@@ -55,7 +55,7 @@ const Form = ({ setTracks, token, setPlaylistDescription }) => {
 
     if (genre) description += `genres of [${genre.join(', ')}], `;
     if (artistSeed) description += `artists including [${artistSeed.join(', ')}], `;
-    if (trackSeed) description += `tracks including [${artistSeed.join(', ')}], `;
+    if (trackSeed) description += `tracks including [${trackSeed.join(', ')}], `;
 
     description += `and a few other paramaters that nobody has time for!`
 
@@ -116,11 +116,7 @@ const Form = ({ setTracks, token, setPlaylistDescription }) => {
           }
         });
 
-        console.log(searchResults);
         searchResults = searchResults.data;
-        // const searchResultNames = searchResults.map((item) => item.name);
-        // const searchResultIds = searchResults.map((item) => item.id);
-
         if(type === 'artist') {
           const searchItems = searchResults.artists.items.map(item => {
             return { name: item.name, id: item.id};
@@ -140,6 +136,7 @@ const Form = ({ setTracks, token, setPlaylistDescription }) => {
 
   return (
     <div>
+      <p>The only requirement is that you choose at least one genre, artist, OR track (up to 5 of each). </p>
       <form>
         <GenreSelect genre={genre} setGenre={setGenre} />
         <InputSeed
