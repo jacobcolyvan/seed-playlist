@@ -1,59 +1,40 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import Button from '@material-ui/core/Button';
+// import CircularProgress from '@material-ui/core/CircularProgress';
 
-const InputSeed = ({ title, setSeed, searchSpotify, searchOptions }) => {
-  const [value, setValue] = useState('');
-  const [inputValue, setInputValue] = useState('');
-  // const loaded = useRef(false);
-  const [open, setOpen] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [options, setOptions] = useState([])
-
-  useEffect(() => {
-    console.log('setting options');
-    searchOptions? setOptions(searchOptions.ids) : setOptions(['no options'])
-  }, [searchOptions])
+const InputSeed = ({ title, seedValue, setSeedValue, searchSpotify, searchOptions, type }) => {
+  // const [inputValue, setInputValue] = useState([]);
 
   return (
     <div>
       <br />
       <Autocomplete
+        multiple
         fullWidth
         id={`${title}-search`}
-        options={options}
-        value={value}
+        options={searchOptions? searchOptions : []}
+        // options={searchOptions}
+        getOptionLabel={option => option.name}
+        // value={seedValue}
         onChange={(e, newValue) => {
-          setSeed(newValue);
-          setValue(newValue)
+          // console.log(newValue);
+          // console.log(seedValue);
+          // console.log(searchOptions);
+          setSeedValue(newValue.map(item => item.id))
+          
         }}
-        onInputChange={(event, newInputValue) => {
-          searchSpotify(newInputValue, 'artist')
-          setInputValue(newInputValue);
+        onInputChange={(e, newInputValue) => {
+          // setInputValue(newInputValue)
+          searchSpotify(newInputValue, type)
         }}
         renderInput={(params) => (
           <TextField {...params} label={title} variant='outlined' />
         )}
+        // getOptionSelected={() => {}}
       />
-
-      {/* <Button onClick={() => {searchSpotify('t', 'artist')}}>searhc</Button> */}
     </div>
   );
 };
 
 export default InputSeed;
-
-
-
-
-// <TextField
-//   fullWidth
-//   label={title}
-//   type='string'
-//   onChange={(e) => {
-//     setSeed(e.target.value);
-//   }}
-//   style={{ flex: 1, margin: '0 20px 0 0', color: 'white' }}
-// />;

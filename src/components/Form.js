@@ -6,15 +6,16 @@ import Button from '@material-ui/core/Button';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 
-const Form = ({ setTracks, token }) => {
+const Form = ({ setTracks, token, setPlaylistDescription }) => {
   const history = useHistory();
 
   const [genre, setGenre] = useState(undefined);
-  const [artistSeed, setArtistSeed] = useState(undefined);
-  const [trackSeed, setTrackSeed] = useState(undefined);
+  const [artistSeed, setArtistSeed] = useState([]);
+  const [trackSeed, setTrackSeed] = useState([]);
   const [activeParams, setActiveParams] = useState([]);
 
-  const [searchOptions, setSearchOptions] = useState(undefined);
+  const [artistSearchOptions, setArtistSearchOptions] = useState([]);
+  const [trackSearchOptions, setTrackSearchOptions] = useState([]);
 
   const getRecommendedTracks = async () => {
     try {
@@ -37,6 +38,7 @@ const Form = ({ setTracks, token }) => {
           ]);
           console.log(trackInfo);
           setTracks(trackInfo);
+          // setPlaylistDescription(createPlaylistDescription())
         })
         .then(() => history.push('/recs'))
         .catch((err) => {
@@ -47,6 +49,14 @@ const Form = ({ setTracks, token }) => {
       console.log(err.message);
     }
   };
+
+  // const createPlaylistDescription = () => {
+  //   let description = `A playlist generated with the`
+
+
+  //   return description
+
+  // }
 
   const onSubmit = async () => {
     if (genre || artistSeed || trackSeed) {
@@ -85,27 +95,40 @@ const Form = ({ setTracks, token }) => {
   };
 
   const searchSpotify = async (query, type) => {
-    try {
-      const url = `https://api.spotify.com/v1/search?market=AU&type=${type}&q=${encodeURIComponent(
-        query
-      )}`;
+    if (query) {
+      try {
+        const url = `https://api.spotify.com/v1/search?market=AU&type=${type}&q=${encodeURIComponent(
+          query
+        )}`;
 
-      let searchResults = await axios({
-        method: 'get',
-        url: url,
-        headers: {
-          Authorization: 'Bearer ' + token,
-          'Content-Type': 'application/json'
+        let searchResults = await axios({
+          method: 'get',
+          url: url,
+          headers: {
+            Authorization: 'Bearer ' + token,
+            'Content-Type': 'application/json'
+          }
+        });
+
+        console.log(searchResults);
+        searchResults = searchResults.data;
+        // const searchResultNames = searchResults.map((item) => item.name);
+        // const searchResultIds = searchResults.map((item) => item.id);
+
+        if(type === 'artist') {
+          const searchItems = searchResults.artists.items.map(item => {
+            return { name: item.name, id: item.id};
+          })
+          setArtistSearchOptions(searchItems)
+        } else {
+          const searchItems = searchResults.tracks.items.map(item => {
+            return { name: `${item.name} – ${item.artists[0].name}`, id: item.id};
+          })
+          setTrackSearchOptions(searchItems)
         }
-      });
-      searchResults = searchResults.data.artists.items;
-      // const searchIds = searchResults
-      const searchResultNames = searchResults.map((item) => item.name);
-      const searchResultIds = searchResults.map((item) => item.id);
-      setSearchOptions({names: searchResultNames, ids: searchResultIds})
-      console.log({names: searchResultNames, ids: searchResultIds});
-    } catch (err) {
-      console.log(err.message);
+      } catch (err) {
+        console.log(err.message);
+      }
     }
   };
 
@@ -114,17 +137,21 @@ const Form = ({ setTracks, token }) => {
       <form>
         <GenreSelect genre={genre} setGenre={setGenre} />
         <InputSeed
-          title='artist id'
-          setSeed={setArtistSeed}
+          title='artists'
+          seedValue={artistSeed}
+          setSeedValue={setArtistSeed}
           searchSpotify={searchSpotify}
-          searchOptions={searchOptions}
+          searchOptions={artistSearchOptions}
+          type='artist'
         />
-        {/* <InputSeed
-          title='track id'
-          setSeed={setTrackSeed}
+        <InputSeed
+          title='tracks'
+          seedValue={trackSeed}
+          setSeedValue={setTrackSeed}
           searchSpotify={searchSpotify}
-        /> */}
-
+          searchOptions={trackSearchOptions}
+          type='track'
+        />
         <br />
         <br />
 

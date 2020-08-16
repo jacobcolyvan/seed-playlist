@@ -4,7 +4,7 @@ import axios from 'axios';
 import Button from '@material-ui/core/Button';
 // Add releevant title and descriptiuon on playlist creation 
 
-const Tracks = ({ tracks, token }) => {
+const Tracks = ({ tracks, token, playlistDescription }) => {
   const history = useHistory();
   const [playlistSaved, setPlaylistSaved] = useState(false)
   const [playlistId, setPlaylistId] = useState(undefined);
@@ -37,8 +37,8 @@ const Tracks = ({ tracks, token }) => {
         Authorization: 'Bearer ' + token
       },
       data: {
-        name: `gena`,
-        description: `A generated playlist`,
+        name: `gena #${Math.round(Math.random() * (1000) *1)}`,
+        description: playlistDescription || `A generated playlist`,
         public: true
       }
     });

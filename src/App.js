@@ -16,6 +16,7 @@ import {
 const App = (props) => {
   const [tracks, setTracks] = useState(undefined);
   const [token, setToken] = useState(undefined);
+  const [playlistDescription, setPlaylistDescription] = useState('');
 
   return (
     <div>
@@ -32,6 +33,7 @@ const App = (props) => {
                     token={token}
                     setToken={setToken}
                     location={props.location}
+                    setPlaylistDescription={setPlaylistDescription}
                   />
                 )}
               />
@@ -39,7 +41,13 @@ const App = (props) => {
               <Route
                 exact
                 path='/recs'
-                render={() => <Tracks tracks={tracks} token={token} />}
+                render={() => (
+                  <Tracks
+                    tracks={tracks}
+                    token={token}
+                    playlistDescription={playlistDescription}
+                  />
+                )}
               />
 
               <Redirect to='/' />
