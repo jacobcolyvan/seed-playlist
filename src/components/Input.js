@@ -7,7 +7,7 @@ const Input = ({ title, saveParam, limit }) => {
       <br />
       <TextField
         fullWidth
-        label={`${title} (between 0 and ${limit})`}
+        label={`${title} (b/w 0 and ${limit})`}
         type='number'
         onChange={(e) => {
           saveParam(title, e.target.value, limit);
