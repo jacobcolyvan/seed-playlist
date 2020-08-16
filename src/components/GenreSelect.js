@@ -19,6 +19,7 @@ const GenreSelect = ({ setGenre }) => {
           <TextField {...params} label='genre' variant='outlined' />
         )}
         multiple
+        max='5'
       />
     </div>
   );

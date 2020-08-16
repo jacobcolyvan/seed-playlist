@@ -136,7 +136,7 @@ const Form = ({ setTracks, token, setPlaylistDescription }) => {
 
   return (
     <div>
-      <p>The only requirement is that you choose at least one genre, artist, OR track (up to 5 of each). </p>
+      <p>The only requirement is that you choose at least one genre, artist, OR track (up to 5 of each). <br/> The ranges for each param, are listed in their title.</p>
       <p>For information about a specific feature visit <a href="https://developer.spotify.com/documentation/web-api/reference/tracks/get-audio-features/" target="_blank" rel="noopener noreferrer">here</a>.</p>
       <form>
         <GenreSelect genre={genre} setGenre={setGenre} />
