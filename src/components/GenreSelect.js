@@ -12,7 +12,7 @@ const GenreSelect = ({ setGenre }) => {
         id='Genre-Autocomplete'
         options={genres.genres}
         // value={value}
-        onChange={(event, newValue) => {
+        onChange={(e, newValue) => {
           setGenre(newValue);
         }}
         renderInput={(params) => (

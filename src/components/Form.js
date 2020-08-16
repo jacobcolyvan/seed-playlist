@@ -14,6 +14,8 @@ const Form = ({ setTracks, token }) => {
   const [trackSeed, setTrackSeed] = useState(undefined);
   const [activeParams, setActiveParams] = useState([]);
 
+  const [searchOptions, setSearchOptions] = useState(undefined);
+
   const getRecommendedTracks = async () => {
     try {
       const url = generateUrl();
@@ -82,10 +84,50 @@ const Form = ({ setTracks, token }) => {
     return url;
   };
 
+  const searchSpotify = async (query, type) => {
+    try {
+      const url = `https://api.spotify.com/v1/search?market=AU&type=${type}&q=${encodeURIComponent(
+        query
+      )}`;
+
+      let searchResults = await axios({
+        method: 'get',
+        url: url,
+        headers: {
+          Authorization: 'Bearer ' + token,
+          'Content-Type': 'application/json'
+        }
+      });
+      searchResults = searchResults.data.artists.items;
+      // const searchIds = searchResults
+      const searchResultNames = searchResults.map((item) => item.name);
+      const searchResultIds = searchResults.map((item) => item.id);
+      setSearchOptions({names: searchResultNames, ids: searchResultIds})
+      console.log({names: searchResultNames, ids: searchResultIds});
+    } catch (err) {
+      console.log(err.message);
+    }
+  };
+
   return (
     <div>
       <form>
         <GenreSelect genre={genre} setGenre={setGenre} />
+        <InputSeed
+          title='artist id'
+          setSeed={setArtistSeed}
+          searchSpotify={searchSpotify}
+          searchOptions={searchOptions}
+        />
+        {/* <InputSeed
+          title='track id'
+          setSeed={setTrackSeed}
+          searchSpotify={searchSpotify}
+        /> */}
+
+        <br />
+        <br />
+
         <Input title='instrumentalness' saveParam={saveActiveParam} limit={1} />
         <Input title='valence' saveParam={saveActiveParam} limit={1} />
         <Input title='acousticness' saveParam={saveActiveParam} limit={1} />
@@ -96,11 +138,6 @@ const Form = ({ setTracks, token }) => {
         <Input title='popularity' saveParam={saveActiveParam} limit={100} />
         <Input title='tempo' saveParam={saveActiveParam} limit={200} />
         <Input title='key' saveParam={saveActiveParam} limit={11} />
-
-        <br />
-        <br />
-        <InputSeed title='artist id' setSeed={setArtistSeed} />
-        <InputSeed title='track id' setSeed={setTrackSeed} />
 
         {/* loudness -60 - 0; mode = 0 or 1 */}
         {/* <Input title='loudness' saveParam={saveActiveParam} limit={1}/> */}
