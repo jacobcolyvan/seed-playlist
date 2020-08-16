@@ -1,4 +1,5 @@
 import React from 'react';
+import Button from '@material-ui/core/Button';
 
 const SpotifyAuth = () => {
   const scopes = [
@@ -9,11 +10,14 @@ const SpotifyAuth = () => {
 
   return (
     <div>
-      <p>
-        You'll want to authorise spotify before you can start generating
-        playlists.
-      </p>
-      <p>
+      <p>This is a website that asks Spotify to make you a playlist based on the information you give it. </p>
+      <p>Because who said crate digging was dead!</p>
+      <p>You'll have to authorise Spotify before you can start making playlists:</p>
+      <Button
+        variant='outlined'
+        color='primary'
+        fullWidth
+      >
         <a
           href={`https://accounts.spotify.com/authorize?response_type=token&client_id=${
             process.env.REACT_APP_SPOTIFY_CLIENT_ID2
@@ -23,7 +27,7 @@ const SpotifyAuth = () => {
         >
           Authorise Spotify
         </a>
-      </p>
+      </Button>
     </div>
   );
 };

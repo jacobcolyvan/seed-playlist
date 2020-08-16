@@ -7,14 +7,14 @@ const Input = ({ title, saveParam, limit }) => {
       <br />
       <TextField
         fullWidth
-        label={title}
+        label={`${title} (between 0 and ${limit})`}
         type='number'
         onChange={(e) => {
           saveParam(title, e.target.value, limit);
         }}
         style={{ flex: 1, margin: '0 20px 0 0', color: 'white' }}
-        min='0'
-        max='1'
+        // min='0'
+        // max='1'
       />
     </div>
   );

@@ -137,6 +137,7 @@ const Form = ({ setTracks, token, setPlaylistDescription }) => {
   return (
     <div>
       <p>The only requirement is that you choose at least one genre, artist, OR track (up to 5 of each). </p>
+      <p>For information about a specific feature visit <a href="https://developer.spotify.com/documentation/web-api/reference/tracks/get-audio-features/" target="_blank" rel="noopener noreferrer">here</a>.</p>
       <form>
         <GenreSelect genre={genre} setGenre={setGenre} />
         <InputSeed
@@ -155,8 +156,7 @@ const Form = ({ setTracks, token, setPlaylistDescription }) => {
           searchOptions={trackSearchOptions}
           type='track'
         />
-        <br />
-        <br />
+        <br /><br />
 
         <Input title='instrumentalness' saveParam={saveActiveParam} limit={1} />
         <Input title='valence' saveParam={saveActiveParam} limit={1} />
@@ -165,6 +165,8 @@ const Form = ({ setTracks, token, setPlaylistDescription }) => {
         <Input title='energy' saveParam={saveActiveParam} limit={1} />
         <Input title='liveness' saveParam={saveActiveParam} limit={1} />
         <Input title='speechiness' saveParam={saveActiveParam} limit={1} />
+
+        <br/><br/>
         <Input title='popularity' saveParam={saveActiveParam} limit={100} />
         <Input title='tempo' saveParam={saveActiveParam} limit={200} />
         <Input title='key' saveParam={saveActiveParam} limit={11} />
