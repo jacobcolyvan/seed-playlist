@@ -10,8 +10,8 @@ const Form = ({ setTracks, token, setPlaylistDescription }) => {
   const history = useHistory();
 
   const [genre, setGenre] = useState(undefined);
-  const [artistSeed, setArtistSeed] = useState([]);
-  const [trackSeed, setTrackSeed] = useState([]);
+  const [artistSeed, setArtistSeed] = useState(undefined);
+  const [trackSeed, setTrackSeed] = useState(undefined);
   const [activeParams, setActiveParams] = useState([]);
 
   const [artistSearchOptions, setArtistSearchOptions] = useState([]);
@@ -38,7 +38,7 @@ const Form = ({ setTracks, token, setPlaylistDescription }) => {
           ]);
           console.log(trackInfo);
           setTracks(trackInfo);
-          // setPlaylistDescription(createPlaylistDescription())
+          setPlaylistDescription(createPlaylistDescription())
         })
         .then(() => history.push('/recs'))
         .catch((err) => {
@@ -50,13 +50,19 @@ const Form = ({ setTracks, token, setPlaylistDescription }) => {
     }
   };
 
-  // const createPlaylistDescription = () => {
-  //   let description = `A playlist generated with the`
+  const createPlaylistDescription = () => {
+    let description = `A playlist generated with the `
 
+    if (genre) description += `genres of [${genre.join(', ')}], `;
+    if (artistSeed) description += `artists including [${artistSeed.join(', ')}], `;
+    if (trackSeed) description += `tracks including [${artistSeed.join(', ')}], `;
 
-  //   return description
+    description += `and a few other paramaters that nobody has time for!`
 
-  // }
+    console.log(description);
+    return description
+
+  }
 
   const onSubmit = async () => {
     if (genre || artistSeed || trackSeed) {
@@ -82,8 +88,8 @@ const Form = ({ setTracks, token, setPlaylistDescription }) => {
     let url = `https://api.spotify.com/v1/recommendations?market=AU`;
 
     if (genre) url += `&seed_genres=${genre.join(',')}`;
-    if (artistSeed) url += `&seed_artists=${artistSeed}`;
-    if (trackSeed) url += `&seed_artists=${artistSeed}`;
+    if (artistSeed) url += `&seed_artists=${artistSeed.join(',')}`;
+    if (trackSeed) url += `&seed_tracks=${trackSeed.join(',')}`;
 
     // console.log(activeParams);
     Object.keys(activeParams).forEach((param) => {

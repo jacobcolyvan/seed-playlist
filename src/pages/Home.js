@@ -3,7 +3,7 @@ import Form from '../components/Form';
 import SpotifyAuth from '../components/SpotifyAuth';
 import { useHistory } from 'react-router-dom';
 
-const Home = ({ setTracks, tracks, token, setToken, location }) => {
+const Home = ({ setTracks, tracks, token, setToken, location, setPlaylistDescription }) => {
   const history = useHistory();
 
   useEffect(() => {
@@ -23,7 +23,7 @@ const Home = ({ setTracks, tracks, token, setToken, location }) => {
     <div>
       <h1>Seed Playlists</h1>
       {token ? (
-        <Form setTracks={setTracks} token={token} tracks={tracks} />
+        <Form setTracks={setTracks} token={token} tracks={tracks} setPlaylistDescription={setPlaylistDescription} />
       ) : (
         <SpotifyAuth />
       )}
