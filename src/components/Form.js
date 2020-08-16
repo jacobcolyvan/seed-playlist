@@ -136,7 +136,7 @@ const Form = ({ setTracks, token, setPlaylistDescription }) => {
 
   return (
     <div>
-      <p>The only requirement is that you choose at least one genre, artist, OR track (up to 5 of each). <br/> The ranges for each param, are listed in their title.</p>
+      <p>The only requirement is that you choose at least one genre, artist, OR track (up to 5 of each). Required ranges for each param are listed in their title.</p>
       <p>For information about a specific feature visit <a href="https://developer.spotify.com/documentation/web-api/reference/tracks/get-audio-features/" target="_blank" rel="noopener noreferrer">here</a>.</p>
       <form>
         <GenreSelect genre={genre} setGenre={setGenre} />
@@ -170,13 +170,11 @@ const Form = ({ setTracks, token, setPlaylistDescription }) => {
         <Input title='popularity' saveParam={saveActiveParam} limit={100} />
         <Input title='tempo' saveParam={saveActiveParam} limit={200} />
         <Input title='key' saveParam={saveActiveParam} limit={11} />
-
         {/* loudness -60 - 0; mode = 0 or 1 */}
         {/* <Input title='loudness' saveParam={saveActiveParam} limit={1}/> */}
         {/* <Input title='mode' saveParam={saveActiveParam} limit={1}/> */}
-
-        <br></br>
-        <br></br>
+        
+        <br/><br/><br/>
         <Button variant='outlined' color='primary' fullWidth onClick={onSubmit}>
           Generate
         </Button>
