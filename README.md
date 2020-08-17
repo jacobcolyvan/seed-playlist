@@ -15,5 +15,5 @@ Run ```npm i``` after cloning, and create a .env file in the root directory (or 
 
 Your Spotify ClientID can be found by <a href='https://developer.spotify.com/documentation/general/guides/app-settings/#register-your-app'>registering your app</a>.
 
-<hr>
+<br><hr>
 And with that, <i>happy digging folks</i>.
