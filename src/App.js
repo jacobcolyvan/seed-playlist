@@ -13,7 +13,7 @@ import {
   Redirect
 } from 'react-router-dom';
 
-const App = (props) => {
+const App = () => {
   const [tracks, setTracks] = useState(undefined);
   const [token, setToken] = useState(undefined);
   const [playlistDescription, setPlaylistDescription] = useState('');

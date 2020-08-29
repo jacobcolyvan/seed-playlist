@@ -18,14 +18,9 @@ const InputSeed = ({ title, seedValue, setSeedValue, searchSpotify, searchOption
         getOptionLabel={option => option.name}
         // value={seedValue}
         onChange={(e, newValue) => {
-          // console.log(newValue);
-          // console.log(seedValue);
-          // console.log(searchOptions);
           setSeedValue(newValue.map(item => item.id))
-          
         }}
         onInputChange={(e, newInputValue) => {
-          // setInputValue(newInputValue)
           searchSpotify(newInputValue, type)
         }}
         renderInput={(params) => (

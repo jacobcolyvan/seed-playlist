@@ -12,7 +12,7 @@ const SpotifyAuth = () => {
     <div>
       <p>
         This is a website that asks Spotify to make you a playlist based on the
-        information you give it.{' '}
+        information you give it.
       </p>
       <p>
         You'll have to authorise Spotify before you can start making playlists:
