@@ -21,7 +21,6 @@ const Home = ({ setTracks, tracks, token, setToken, location, setPlaylistDescrip
 
   return (
     <div>
-      <h1>Seed Playlists</h1>
       {token ? (
         <Form setTracks={setTracks} token={token} tracks={tracks} setPlaylistDescription={setPlaylistDescription} />
       ) : (

@@ -3,12 +3,22 @@
   color: #ffffff; */
 
   font-family: 'Roboto';
+  margin: 0;
+  padding: 0;
+}
+
+p {
+  margin: 8px 0;
 }
 
 ul {
   list-style: none;
   padding: 0;
   margin: 10px 0;
+}
+
+hr {
+  margin: 24px 0;
 }
 
 .button {
@@ -26,4 +36,16 @@ ul {
   padding: 6px 4px;
   border-radius: 4px;
 }
+
+.main {
+  margin-bottom: 16px;
+}
+
+
+
+// #auth-page {
+//   height: 100vh;
+//   display:flex; 
+//   align-items:center;
+// }
 

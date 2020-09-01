@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import Home from './pages/Home';
 import Tracks from './pages/Tracks';
+import Navbar from './components/Navbar';
+
 import { Container } from '@material-ui/core';
-import './App.css';
+import './App.scss';
 import theme from './theme';
 import { ThemeProvider } from '@material-ui/core/styles';
 
@@ -19,10 +21,11 @@ const App = () => {
   const [playlistDescription, setPlaylistDescription] = useState('');
 
   return (
-    <div>
+    <div className='main'>
       <ThemeProvider theme={theme}>
-        <Container maxWidth='sm'>
-          <Router>
+        <Router>
+          <Navbar />
+          <Container maxWidth='md' style={{ padding: '0 12px' }}>
             <Switch>
               <Route
                 exact
@@ -52,8 +55,8 @@ const App = () => {
 
               <Redirect to='/' />
             </Switch>
-          </Router>
-        </Container>
+          </Container>
+        </Router>
       </ThemeProvider>
     </div>
   );

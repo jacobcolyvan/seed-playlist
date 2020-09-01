@@ -4,7 +4,6 @@ import Autocomplete from '@material-ui/lab/Autocomplete';
 // import CircularProgress from '@material-ui/core/CircularProgress';
 
 const InputSeed = ({ title, seedValue, setSeedValue, searchSpotify, searchOptions, type }) => {
-  // const [inputValue, setInputValue] = useState([]);
 
   return (
     <div>
