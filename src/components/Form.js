@@ -189,7 +189,7 @@ const Form = ({ setTracks, token, setPlaylistDescription }) => {
         {/* <Input title='loudness' saveParam={saveActiveParam} limit={1}/> */}
         {/* <Input title='mode' saveParam={saveActiveParam} limit={1}/> */}
         
-        <br/><br/><br/>
+        <br/><br/>
         <Button variant='outlined' color='primary' fullWidth onClick={onSubmit}>
           Get Tracks
         </Button>

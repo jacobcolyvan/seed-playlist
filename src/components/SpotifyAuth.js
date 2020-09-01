@@ -17,7 +17,7 @@ const SpotifyAuth = () => {
           Essentially a website for creating your own daily mixes.
         </p>
         <br />
-        <p>
+        <p style={{ margin: '8px 0 12px 0'}}>
           You'll have to authorise Spotify before you can start making
           playlists:
         </p>
