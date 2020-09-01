@@ -6,7 +6,6 @@ import genres from '../utils/genres.json';
 const GenreSelect = ({ setGenre }) => {
   return (
     <div>
-      <br />
       <Autocomplete
         fullWidth
         id='Genre-Autocomplete'
@@ -20,6 +19,7 @@ const GenreSelect = ({ setGenre }) => {
         )}
         multiple
         max='5'
+        style={{ margin: '8px 0'}}
       />
     </div>
   );

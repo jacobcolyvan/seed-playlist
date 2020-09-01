@@ -7,7 +7,6 @@ const InputSeed = ({ title, seedValue, setSeedValue, searchSpotify, searchOption
 
   return (
     <div>
-      <br />
       <Autocomplete
         multiple
         fullWidth
@@ -26,6 +25,7 @@ const InputSeed = ({ title, seedValue, setSeedValue, searchSpotify, searchOption
           <TextField {...params} label={title} variant='outlined' />
         )}
         // getOptionSelected={() => {}}
+        style={{ margin: '8px 0'}}
       />
     </div>
   );

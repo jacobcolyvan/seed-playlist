@@ -6,8 +6,7 @@ const Input = ({ title, saveParam, limit }) => {
   if (limit !== 1) label = `${title} (0 - ${limit})`;
 
   return (
-    <div>
-      <br />
+    <>
       <TextField
         fullWidth
         label={label}
@@ -15,11 +14,9 @@ const Input = ({ title, saveParam, limit }) => {
         onChange={(e) => {
           saveParam(title, e.target.value, limit);
         }}
-        style={{ flex: 1, margin: '0 20px 0 0', color: 'white' }}
-        // min='0'
-        // max='5'
+        style={{ flex: 1, margin: '4px 20px 0 0', color: 'white' }}
       />
-    </div>
+    </>
   );
 };
 
