@@ -86,7 +86,9 @@ const Tracks = ({ tracks, token, playlistDescription }) => {
 
   return (
     <div>
-      <h1>Show Tracks</h1>
+      <h1><i>Recommendations</i></h1>
+      {playlistDescription && <p>{playlistDescription}</p>}
+      <br/>
       {tracks && (
         <>
           <ul className='recommended-tracks'>
@@ -98,7 +100,6 @@ const Tracks = ({ tracks, token, playlistDescription }) => {
                   {track[4] && <img src={track[4]} alt={`track img`} width="60" height="60" />}
                 </div>
               </li>
-              
             ))}
           </ul>
           

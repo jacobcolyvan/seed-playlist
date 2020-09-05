@@ -31,7 +31,7 @@ const Form = ({ setTracks, token, setPlaylistDescription }) => {
         }
       })
       .then((data) => {
-        console.log(data)
+        // console.log(data)
         const trackInfo = data.data.tracks.map((track) => [
           track.name,
           track.artists[0].name,
@@ -39,7 +39,7 @@ const Form = ({ setTracks, token, setPlaylistDescription }) => {
           track.id,
           track.album.images[1].url
         ]);
-        console.log(trackInfo);
+        // console.log(trackInfo);
         setTracks(trackInfo);
         setPlaylistDescription(createPlaylistDescription())
       })
@@ -57,14 +57,13 @@ const Form = ({ setTracks, token, setPlaylistDescription }) => {
     let description = `A playlist generated with the `
 
     if (genre) description += `genres of [${genre.join(', ')}], `;
-    if (artistSeed) description += `artists including [${artistSeed.join(', ')}], `;
-    if (trackSeed) description += `tracks including [${trackSeed.join(', ')}], `;
+    if (artistSeed) description += `artists including [${artistSeed.map(artist => artist.name).join(', ')}], `;
+    if (trackSeed) description += `tracks including [${trackSeed.map(track => track.name).join(', ')}], `;
 
     description += `and a few other paramaters that nobody has time for!`
 
     console.log(description);
     return description
-
   }
 
   const onSubmit = async () => {
@@ -91,11 +90,10 @@ const Form = ({ setTracks, token, setPlaylistDescription }) => {
     let url = `https://api.spotify.com/v1/recommendations?market=AU`;
 
     if (genre) url += `&seed_genres=${genre.join(',')}`;
-    if (artistSeed) url += `&seed_artists=${artistSeed.join(',')}`;
-    if (trackSeed) url += `&seed_tracks=${trackSeed.join(',')}`;
+    if (artistSeed) url += `&seed_artists=${artistSeed.map(artist => artist.id).join(',')}`;
+    if (trackSeed) url += `&seed_tracks=${trackSeed.map(track => track.id).join(',')}`;
     if (mode) url += `&target_mode=${mode}`
-    console.log(mode)
-    // console.log(activeParams);
+
     Object.keys(activeParams).forEach((param) => {
       url += `&target_${param}=${activeParams[param]}`;
     });

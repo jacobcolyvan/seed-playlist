@@ -15,10 +15,14 @@ const Navbar = () => {
         <Container maxWidth='md' style={{ padding: '0 12px' }} >
           <Typography
             variant='h3'
-            style={{ color: 'white' }}
-            onClick={() => {history.push('/')}}
+            className='navbar-title'
           >
-            Seed Playlists
+            <span 
+              className='navbar-title-text'
+              onClick={() => {history.push('/')}}
+            >
+              Seed Playlists
+            </span>
           </Typography>
         </Container>
       </AppBar>
