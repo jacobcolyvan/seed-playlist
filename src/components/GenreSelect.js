@@ -20,6 +20,7 @@ const GenreSelect = ({ setGenre }) => {
         multiple
         max='5'
         style={{ margin: '8px 0'}}
+        freeSolo
       />
     </div>
   );

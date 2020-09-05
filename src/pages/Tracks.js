@@ -87,8 +87,8 @@ const Tracks = ({ tracks, token, playlistDescription }) => {
   return (
     <div>
       <h1><i>Recommendations</i></h1>
-      {playlistDescription && <p>{playlistDescription}</p>}
-      <br/>
+      {playlistDescription && <p style={{paddingBottom: '16px'}}>{playlistDescription}</p>}
+      
       {tracks && (
         <>
           <ul className='recommended-tracks'>
@@ -97,7 +97,7 @@ const Tracks = ({ tracks, token, playlistDescription }) => {
                 <div className='single-track-div'>
                   <div className='track-name'>{track[1]}: <i>{track[0]}</i></div>
                   {/* put play button here */}
-                  {track[4] && <img src={track[4]} alt={`track img`} width="60" height="60" />}
+                  {track[4] && <img src={track[4]} alt={`track img`} width="90" height="90" />}
                 </div>
               </li>
             ))}

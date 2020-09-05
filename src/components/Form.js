@@ -1,11 +1,17 @@
 import React, { useState } from 'react';
+import axios from 'axios';
+import { useHistory } from 'react-router-dom';
+import Button from '@material-ui/core/Button';
+
+
 import Input from './Input';
 import InputSeed from './InputSeed';
 import GenreSelect from './GenreSelect';
 import SelectMode from './SelectMode'
-import Button from '@material-ui/core/Button';
-import axios from 'axios';
-import { useHistory } from 'react-router-dom';
+import ErrorNotice from './ErrorNotice'
+
+
+
 
 const Form = ({ setTracks, token, setPlaylistDescription }) => {
   const history = useHistory();
@@ -17,7 +23,7 @@ const Form = ({ setTracks, token, setPlaylistDescription }) => {
   const [mode, setMode] = useState('')
   const [artistSearchOptions, setArtistSearchOptions] = useState([]);
   const [trackSearchOptions, setTrackSearchOptions] = useState([]);
-  // const [error, setError] = useState(undefined)
+  const [error, setError] = useState(undefined)
 
   const getRecommendedTracks = async () => {
     try {
@@ -77,8 +83,9 @@ const Form = ({ setTracks, token, setPlaylistDescription }) => {
       await getRecommendedTracks();
         //setError to "pick a genre/artist/track ya twat"
         // console.log('You need a genre mate');
-    } catch (error) {
-      console.log(error.message)
+    } catch (err) {
+      console.log(err.message)
+      setError(err.message)
     } 
   };
 
@@ -96,9 +103,9 @@ const Form = ({ setTracks, token, setPlaylistDescription }) => {
   const generateUrl = () => {
     let url = `https://api.spotify.com/v1/recommendations?market=AU`;
 
-    if (genre) url += `&seed_genres=${genre.join(',')}`;
-    if (artistSeed) url += `&seed_artists=${artistSeed.map(artist => artist.id).join(',')}`;
-    if (trackSeed) url += `&seed_tracks=${trackSeed.map(track => track.id).join(',')}`;
+    if (genre) url += `&seed_genres=${ genre.join(',') }`;
+    if (artistSeed) url += `&seed_artists=${ artistSeed.map(artist => artist.id).join(',') }`;
+    if (trackSeed) url += `&seed_tracks=${ trackSeed.map(track => track.id).join(',') }`;
     if (mode) url += `&target_mode=${mode}`
 
     Object.keys(activeParams).forEach((param) => {
@@ -147,6 +154,10 @@ const Form = ({ setTracks, token, setPlaylistDescription }) => {
     <div>
       <p>Required ranges are between 0 and 1, unless specified otherwise.</p>
       <p>For information about a specific feature visit <a href="https://developer.spotify.com/documentation/web-api/reference/tracks/get-audio-features/" target="_blank" rel="noopener noreferrer">here</a>.</p>
+
+      {error && (
+        <ErrorNotice message={error} clearError={() => setError(undefined)} />
+      )}
 
       <hr/>
 

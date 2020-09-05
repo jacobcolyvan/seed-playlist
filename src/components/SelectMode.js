@@ -1,8 +1,4 @@
 import React from 'react';
-// import Select from '@material-ui/core/Select';
-// import MenuItem from '@material-ui/core/Select'
-// import FormControl from '@material-ui/core/FormControl';
-// import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import InputLabel from '@material-ui/core/InputLabel';
@@ -16,14 +12,12 @@ const SelectMode = ({ mode, setMode }) => {
   return (
     <div>
       <FormControl fullWidth>
-      <InputLabel id="mode-select-label" >Select Mode (major/minor)</InputLabel>
+      <InputLabel id="mode-select-label" >select mode (major/minor)</InputLabel>
       <Select
         labelId='Select a Mode (major/minor)'
         id='mode-select'
         value={mode}
         onChange={handleModeCHange}
-        // fullWidth
-        // variant='outlined'
       >
         <MenuItem value={false}>None</MenuItem>
         <MenuItem value={'1'}>Major</MenuItem>

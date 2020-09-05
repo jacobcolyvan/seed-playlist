@@ -4,6 +4,10 @@
   padding: 0;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 p {
   margin: 8px 0;
   font-size: 18px;
@@ -74,4 +78,24 @@ hr {
 
 .navbar-title-text:hover {
   cursor: pointer;
+}
+
+
+.error-notice {
+  border: 1px solid red;
+  padding: 9px;
+  // padding-left: 9px;
+  margin: 1rem 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fffbfb;
+  border-radius: 0.2rem;
+  // width: 100%;
+}
+
+.error-notice * {
+  font-size: 18px;
+  // background-color: #fce9e9;
+  color: black;
 }
