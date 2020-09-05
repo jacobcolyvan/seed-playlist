@@ -1,20 +1,37 @@
 import React, {useState} from 'react';
 import TextField from '@material-ui/core/TextField';
 
-const Input = ({ title, saveParam, limit }) => {
+const Input = ({ title, saveParam, limit, wholeNumber }) => {
+  const [error, setError] = useState(false)
+
   let label = `${title}`
   if (limit !== 1) label = `${title} (0 - ${limit})`;
 
-  const [error, setError] = useState(false)
-
   const validateInput = (e) => {
-    console.log(e.target.value)
-    if (!e.target.value || (e.target.value >= 0 && e.target.value < limit) ) {
-      setError(false)
-      saveParam(title, e.target.value, limit)
+    const value = e.target.value
+    if (wholeNumber && !Number.isInteger(parseFloat(value))) {
+      setError(true)     
+    } else if (!(!value || (value >= 0 && value < limit))) {
+      setError(true)    
     } else {
-      setError(true)
+      setError(false)
+      saveParam(title, value, limit)
     } 
+
+    // if (wholeNumber) {
+    //   if(Number.isInteger(parseFloat(value)) 
+    //   && (!value || (value >= 0 && value < limit))) {
+    //     setError(false)
+    //     saveParam(title, value, limit)
+    //   } else {
+    //     setError(true)     
+    //   }
+    // } else if (!value || (value >= 0 && value < limit)) {
+    //   setError(false)
+    //   saveParam(title, value, limit)
+    // } else {
+    //   setError(true)  
+    // } 
   }
 
   return (

@@ -195,10 +195,10 @@ const Form = ({ setTracks, token, setPlaylistDescription }) => {
         <Input title='speechiness' saveParam={saveActiveParam} limit={1} />
 
         <hr/>
-        <p>These have ranges as described (not required).</p>     
-        <Input title='popularity' saveParam={saveActiveParam} limit={100} />
-        <Input title='tempo' saveParam={saveActiveParam} limit={200} />
-        <Input title='key' saveParam={saveActiveParam} limit={11} />
+        <p>These can't be decimals, and have ranges as described (not required).</p>     
+        <Input title='popularity' saveParam={saveActiveParam} limit={100} wholeNumber={true} />
+        <Input title='tempo' saveParam={saveActiveParam} limit={200} wholeNumber={true} />
+        <Input title='key' saveParam={saveActiveParam} limit={11} wholeNumber={true} />
         <SelectMode setMode={setMode} mode={mode} />
          
         {/* <Input title='loudness' saveParam={saveActiveParam} limit={1}/> */}
