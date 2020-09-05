@@ -14,7 +14,7 @@ const Form = ({ setTracks, token, setPlaylistDescription }) => {
   const [artistSeed, setArtistSeed] = useState(undefined);
   const [trackSeed, setTrackSeed] = useState(undefined);
   const [activeParams, setActiveParams] = useState([]);
-  const [mode, setMode] = useState(undefined)
+  const [mode, setMode] = useState('')
   const [artistSearchOptions, setArtistSearchOptions] = useState([]);
   const [trackSearchOptions, setTrackSearchOptions] = useState([]);
 
@@ -31,11 +31,13 @@ const Form = ({ setTracks, token, setPlaylistDescription }) => {
         }
       })
       .then((data) => {
+        console.log(data)
         const trackInfo = data.data.tracks.map((track) => [
           track.name,
           track.artists[0].name,
           track.preview_url,
-          track.id
+          track.id,
+          track.album.images[1].url
         ]);
         console.log(trackInfo);
         setTracks(trackInfo);
@@ -92,7 +94,7 @@ const Form = ({ setTracks, token, setPlaylistDescription }) => {
     if (artistSeed) url += `&seed_artists=${artistSeed.join(',')}`;
     if (trackSeed) url += `&seed_tracks=${trackSeed.join(',')}`;
     if (mode) url += `&target_mode=${mode}`
-
+    console.log(mode)
     // console.log(activeParams);
     Object.keys(activeParams).forEach((param) => {
       url += `&target_${param}=${activeParams[param]}`;

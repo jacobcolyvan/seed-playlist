@@ -9,6 +9,10 @@ import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 
 const SelectMode = ({ mode, setMode }) => {
+  const handleModeCHange = (event) => {
+    setMode(event.target.value)
+  }
+
   return (
     <div>
       <FormControl fullWidth>
@@ -17,11 +21,11 @@ const SelectMode = ({ mode, setMode }) => {
         labelId='Select a Mode (major/minor)'
         id='mode-select'
         value={mode}
-        onChange={setMode}
+        onChange={handleModeCHange}
         // fullWidth
         // variant='outlined'
       >
-        <MenuItem value={false}>Doesn't matter</MenuItem>
+        <MenuItem value={false}>None</MenuItem>
         <MenuItem value={'1'}>Major</MenuItem>
         <MenuItem value={'0'}>Minor</MenuItem>
       </Select>

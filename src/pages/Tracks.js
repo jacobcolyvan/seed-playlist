@@ -92,9 +92,13 @@ const Tracks = ({ tracks, token, playlistDescription }) => {
           <ul className='recommended-tracks'>
             {tracks.map((track, index) => (
               <li className='track' key={`track${index}`}>
-                {track[1]}: <i>{track[0]}</i>
-                {/* put play button here */}
+                <div className='single-track-div'>
+                  <div className='track-name'>{track[1]}: <i>{track[0]}</i></div>
+                  {/* put play button here */}
+                  {track[4] && <img src={track[4]} alt={`track img`} width="60" height="60" />}
+                </div>
               </li>
+              
             ))}
           </ul>
           
@@ -105,7 +109,6 @@ const Tracks = ({ tracks, token, playlistDescription }) => {
             fullWidth
             onClick={savePlaylist}
             disabled={playlistSaved}
-            // style={{ margin: '2px 0' }}
           >
             Save Playlist
           </Button>
@@ -116,7 +119,6 @@ const Tracks = ({ tracks, token, playlistDescription }) => {
             fullWidth
             onClick={deletePlaylist}
             disabled={!playlistSaved}
-            // style={{ margin: '2px 0' }}
           >
             Delete Playlist
           </Button>

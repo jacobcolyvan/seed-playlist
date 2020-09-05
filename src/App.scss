@@ -30,8 +30,8 @@ hr {
 }
 
 .track {
-  border: 1px solid #445488;
-  padding: 6px 4px;
+  border: 1px solid #6575aa;
+  padding: 8px 4px;
   border-radius: 4px;
 }
 
@@ -53,3 +53,17 @@ hr {
 //   align-items:center;
 // }
 
+.single-track-div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 8px;
+  /* flex-wrap: wrap; */
+}
+
+.track-name {
+  word-wrap: break-word;
+}
+.track-image {
+  border: 1px solid #6575aa;
+}
