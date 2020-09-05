@@ -17,6 +17,7 @@ const Form = ({ setTracks, token, setPlaylistDescription }) => {
   const [mode, setMode] = useState('')
   const [artistSearchOptions, setArtistSearchOptions] = useState([]);
   const [trackSearchOptions, setTrackSearchOptions] = useState([]);
+  // const [error, setError] = useState(undefined)
 
   const getRecommendedTracks = async () => {
     try {
@@ -56,9 +57,9 @@ const Form = ({ setTracks, token, setPlaylistDescription }) => {
   const createPlaylistDescription = () => {
     let description = `A playlist generated with the `
 
-    if (genre) description += `genres of [${genre.join(', ')}], `;
-    if (artistSeed) description += `artists including [${artistSeed.map(artist => artist.name).join(', ')}], `;
-    if (trackSeed) description += `tracks including [${trackSeed.map(track => track.name).join(', ')}], `;
+    if (genre) description += `genres of {${genre.join(', ')}}, `;
+    if (artistSeed) description += `artists including {${artistSeed.map(artist => artist.name).join(', ')}}, `;
+    if (trackSeed) description += `tracks including {${trackSeed.map(track => track.name).join(', ')}}, `;
 
     description += `and a few other paramaters that nobody has time for!`
 
@@ -67,12 +68,18 @@ const Form = ({ setTracks, token, setPlaylistDescription }) => {
   }
 
   const onSubmit = async () => {
-    if (genre || artistSeed || trackSeed) {
+    try {
+      if (!(genre || artistSeed || trackSeed)) throw new Error('Pick at least one genre/artist/track');
+      if (genre && genre.length > 5) throw new Error('You can\'t have more than 5 genres')
+      if (artistSeed && artistSeed.length > 5) throw new Error('You can\'t have more than 5 artists')
+      if (trackSeed && trackSeed.length > 5) throw new Error('You can\'t have more than 5 tracks')
+
       await getRecommendedTracks();
-    } else {
-      //setError to "pick a genre/artist/track ya twat"
-      console.log('You need a genre mate');
-    }
+        //setError to "pick a genre/artist/track ya twat"
+        // console.log('You need a genre mate');
+    } catch (error) {
+      console.log(error.message)
+    } 
   };
 
   const saveActiveParam = (param_name, value, limit) => {

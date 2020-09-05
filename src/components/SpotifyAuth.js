@@ -12,7 +12,7 @@ const SpotifyAuth = () => {
     <div id='auth-page'>
       <p id='auth-info'>
         This is a website that lets you use Spotify to generate and save playlists. <br />
-        Essentially a website for creating your own daily mixes.
+        Essentially a site for creating your own daily mixes.
       </p>
       <br />
       <p><i>Authorise Spotify to start:</i></p>

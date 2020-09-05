@@ -13,10 +13,9 @@ const InputSeed = ({ title, setSeedValue, searchSpotify, searchOptions, type }) 
         id={`${title}-search`}
         options={searchOptions? searchOptions : []}
         // options={searchOptions}
-        getOptionLabel={option => option.name}
+        getOptionLabel={(option) => option.name}
         // value={seedValue}
         onChange={(e, newValue) => {
-          console.log(newValue)
           setSeedValue(newValue)
           // setSeedValue(newValue.map(item => [item.id, item.name]))
         }}
@@ -27,6 +26,8 @@ const InputSeed = ({ title, setSeedValue, searchSpotify, searchOptions, type }) 
           <TextField {...params} label={title} variant='outlined' />
         )}
         style={{ margin: '8px 0'}}
+        // getOptionSelected={(option, value) => true}
+        freeSolo
       />
     </div>
   );
