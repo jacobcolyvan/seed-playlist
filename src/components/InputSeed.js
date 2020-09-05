@@ -3,7 +3,7 @@ import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 // import CircularProgress from '@material-ui/core/CircularProgress';
 
-const InputSeed = ({ title, seedValue, setSeedValue, searchSpotify, searchOptions, type }) => {
+const InputSeed = ({ title, setSeedValue, searchSpotify, searchOptions, type }) => {
 
   return (
     <div>

@@ -14,7 +14,7 @@ const Form = ({ setTracks, token, setPlaylistDescription }) => {
   const [artistSeed, setArtistSeed] = useState(undefined);
   const [trackSeed, setTrackSeed] = useState(undefined);
   const [activeParams, setActiveParams] = useState([]);
-  const [mode, setMode] = useState(false)
+  const [mode, setMode] = useState(undefined)
   const [artistSearchOptions, setArtistSearchOptions] = useState([]);
   const [trackSearchOptions, setTrackSearchOptions] = useState([]);
 
@@ -30,22 +30,22 @@ const Form = ({ setTracks, token, setPlaylistDescription }) => {
           'Content-Type': 'application/json'
         }
       })
-        .then((data) => {
-          const trackInfo = data.data.tracks.map((track) => [
-            track.name,
-            track.artists[0].name,
-            track.preview_url,
-            track.id
-          ]);
-          console.log(trackInfo);
-          setTracks(trackInfo);
-          setPlaylistDescription(createPlaylistDescription())
-        })
-        .then(() => history.push('/recs'))
-        .catch((err) => {
-          console.log(err.message);
-          console.log('There was an error getting recommended tracks');
-        });
+      .then((data) => {
+        const trackInfo = data.data.tracks.map((track) => [
+          track.name,
+          track.artists[0].name,
+          track.preview_url,
+          track.id
+        ]);
+        console.log(trackInfo);
+        setTracks(trackInfo);
+        setPlaylistDescription(createPlaylistDescription())
+      })
+      .then(() => history.push('/recs'))
+      .catch((err) => {
+        console.log(err.message);
+        console.log('There was an error getting recommended tracks');
+      });
     } catch (err) {
       console.log(err.message);
     }
@@ -175,19 +175,15 @@ const Form = ({ setTracks, token, setPlaylistDescription }) => {
         <Input title='energy' saveParam={saveActiveParam} limit={1} />
         <Input title='liveness' saveParam={saveActiveParam} limit={1} />
         <Input title='speechiness' saveParam={saveActiveParam} limit={1} />
-        {/* </div> */}
 
-        {/* <br/><br/> */}
         <hr/>
-        <p>These have ranges as described (not required).</p>
+        <p>These have ranges as described (not required).</p>     
         <Input title='popularity' saveParam={saveActiveParam} limit={100} />
         <Input title='tempo' saveParam={saveActiveParam} limit={200} />
         <Input title='key' saveParam={saveActiveParam} limit={11} />
         <SelectMode setMode={setMode} mode={mode} />
-        
-        {/* loudness -60 - 0; mode = 0 or 1 */}
+         
         {/* <Input title='loudness' saveParam={saveActiveParam} limit={1}/> */}
-        {/* <Input title='mode' saveParam={saveActiveParam} limit={1}/> */}
         
         <br/><br/>
         <Button variant='outlined' color='primary' fullWidth onClick={onSubmit}>

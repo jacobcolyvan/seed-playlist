@@ -10,30 +10,26 @@ const SpotifyAuth = () => {
 
   return (
     <div id='auth-page'>
-      <div>
-        <p>
-          This is a website that asks Spotify to make you a playlist based on
-          the information you give it. <br />
-          Essentially a website for creating your own daily mixes.
-        </p>
-        <br />
-        <p style={{ margin: '8px 0 12px 0'}}>
-          You'll have to authorise Spotify before you can start making
-          playlists:
-        </p>
+      <p id='auth-info'>
+        This is a lets you use Spotify to generate and save playlists. <br />
+        Essentially a website for creating your own daily mixes.
+      </p>
+      <br />
+      <p>
+        <i>Authorise Spotify to start:</i>
+      </p>
 
-        <a
-          href={`https://accounts.spotify.com/authorize?response_type=token&client_id=${
-            process.env.REACT_APP_SPOTIFY_CLIENT_ID2
-          }&scope=${scopes.join('%20')}&redirect_uri=${encodeURIComponent(
-            process.env.REACT_APP_SPOTIFY_CALLBACK_URI
-          )}&show_dialog=false`}
-        >
-          <Button variant='outlined' color='primary' fullWidth>
-            Authorise Spotify
-          </Button>
-        </a>
-      </div>
+      <a
+        href={`https://accounts.spotify.com/authorize?response_type=token&client_id=${
+          process.env.REACT_APP_SPOTIFY_CLIENT_ID2
+        }&scope=${scopes.join('%20')}&redirect_uri=${encodeURIComponent(
+          process.env.REACT_APP_SPOTIFY_CALLBACK_URI
+        )}&show_dialog=false`}
+      >
+        <Button variant='outlined' color='primary' fullWidth>
+          Authorise Spotify
+        </Button>
+      </a>
     </div>
   );
 };

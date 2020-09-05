@@ -7,6 +7,7 @@ import { Container } from '@material-ui/core';
 import './App.scss';
 import theme from './theme';
 import { ThemeProvider } from '@material-ui/core/styles';
+import Paper from '@material-ui/core/Paper';
 
 import {
   BrowserRouter as Router,
@@ -25,36 +26,38 @@ const App = () => {
       <ThemeProvider theme={theme}>
         <Router>
           <Navbar />
-          <Container maxWidth='md' style={{ padding: '0 12px' }}>
-            <Switch>
-              <Route
-                exact
-                path='/'
-                render={(props) => (
-                  <Home
-                    setTracks={setTracks}
-                    token={token}
-                    setToken={setToken}
-                    location={props.location}
-                    setPlaylistDescription={setPlaylistDescription}
-                  />
-                )}
-              />
+          <Container maxWidth='md' style={{ padding: '0 8px' }}>
+            <Paper variant='outlined' style={{padding: '12px', margin:'24px 0'}}>
+              <Switch>
+                <Route
+                  exact
+                  path='/'
+                  render={(props) => (
+                    <Home
+                      setTracks={setTracks}
+                      token={token}
+                      setToken={setToken}
+                      location={props.location}
+                      setPlaylistDescription={setPlaylistDescription}
+                    />
+                  )}
+                />
 
-              <Route
-                exact
-                path='/recs'
-                render={() => (
-                  <Tracks
-                    tracks={tracks}
-                    token={token}
-                    playlistDescription={playlistDescription}
-                  />
-                )}
-              />
+                <Route
+                  exact
+                  path='/recs'
+                  render={() => (
+                    <Tracks
+                      tracks={tracks}
+                      token={token}
+                      playlistDescription={playlistDescription}
+                    />
+                  )}
+                />
 
-              <Redirect to='/' />
-            </Switch>
+                <Redirect to='/' />
+              </Switch>
+            </Paper>
           </Container>
         </Router>
       </ThemeProvider>

@@ -14,7 +14,7 @@ const Input = ({ title, saveParam, limit }) => {
         onChange={(e) => {
           saveParam(title, e.target.value, limit);
         }}
-        style={{ flex: 1, margin: '4px 20px 0 0', color: 'white' }}
+        style={{ flex: 1, margin: '4px 20px 0 0', color: 'white'}}
       />
     </>
   );
