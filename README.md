@@ -24,7 +24,7 @@ If interested, other Spotify-based sites that I've written are:
 * <ins>Spotify Metadata</ins> – <a href=https://github.com/jacobcolyvan/spotify-metadata target="_blank"> Github</a>, <a href=https://spotify-metadata.netlify.app/ target="_blank">deployed</a>.
 * <ins>Mix Master</ins> – <a href="https://github.com/jacobcolyvan/mix-master" target="_blank"> Github</a>, <a href="https://mix-master.netlify.app/" target="_blank">deployed</a>.
 
-<br>
+<hr>
 
 Otherwise, <br>
 <i>Happy Coding, Stay Safe</i> \
