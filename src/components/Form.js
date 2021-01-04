@@ -86,7 +86,7 @@ const Form = ({ setTracks, token, setPlaylistDescription }) => {
     } catch (err) {
       console.log(err.message)
       setError(err.message)
-    } 
+    }
   };
 
   const saveActiveParam = (param_name, value, limit) => {
@@ -181,7 +181,7 @@ const Form = ({ setTracks, token, setPlaylistDescription }) => {
           searchOptions={trackSearchOptions}
           type='track'
         />
-        
+
 
         <hr/>
         <p>These range between 0 and 1 (not required).</p>
@@ -195,15 +195,16 @@ const Form = ({ setTracks, token, setPlaylistDescription }) => {
         <Input title='speechiness' saveParam={saveActiveParam} limit={1} />
 
         <hr/>
-        <p>These can't be decimals, and have ranges as described (not required).</p>     
+        <p>These can't be decimals, and have ranges as described (not required).</p>
         <Input title='popularity' saveParam={saveActiveParam} limit={100} wholeNumber={true} />
         <Input title='tempo' saveParam={saveActiveParam} limit={200} wholeNumber={true} />
         <Input title='key' saveParam={saveActiveParam} limit={11} wholeNumber={true} />
         <SelectMode setMode={setMode} mode={mode} />
-         
+
         {/* <Input title='loudness' saveParam={saveActiveParam} limit={1}/> */}
-        
-        <br/><br/>
+
+        <br/><br/><br/>
+
         <Button variant='outlined' color='primary' fullWidth onClick={onSubmit}>
           Get Tracks
         </Button>
