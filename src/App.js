@@ -1,7 +1,4 @@
 import React, { useState } from 'react';
-import Home from './pages/Home';
-import Tracks from './pages/Tracks';
-import Navbar from './components/Navbar';
 
 import { Container } from '@material-ui/core';
 import './App.scss';
@@ -16,22 +13,29 @@ import {
   Redirect
 } from 'react-router-dom';
 
+import Navbar from './components/Navbar';
+import Home from './pages/Home';
+import Tracks from './pages/Tracks';
+import About from './pages/About';
+
+
+
 const App = () => {
   const [tracks, setTracks] = useState(undefined);
   const [token, setToken] = useState(undefined);
   const [playlistDescription, setPlaylistDescription] = useState('');
+  const [onAboutPage, setOnAboutPage] = useState(false);
 
   return (
     <div className='main'>
       <ThemeProvider theme={theme}>
         <Router>
-          <Navbar />
+          <Navbar onAboutPage={onAboutPage} setOnAboutPage={setOnAboutPage} />
           <Container maxWidth='md' style={{ padding: '0 8px' }}>
             <Paper variant='outlined' style={{padding: '12px', margin:'24px 0'}}>
               <Switch>
                 <Route
-                  exact
-                  path='/'
+                  exact path='/'
                   render={(props) => (
                     <Home
                       setTracks={setTracks}
@@ -44,8 +48,7 @@ const App = () => {
                 />
 
                 <Route
-                  exact
-                  path='/recs'
+                  exact path='/recs'
                   render={() => (
                     <Tracks
                       tracks={tracks}
@@ -53,6 +56,11 @@ const App = () => {
                       playlistDescription={playlistDescription}
                     />
                   )}
+                />
+
+                <Route
+                  exact path='/about'
+                  component={About}
                 />
 
                 <Redirect to='/' />
