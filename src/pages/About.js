@@ -49,10 +49,10 @@ const About = () => {
         <p id="links-header">If you're interested, other Spotify-based sites that I've written can be found at:</p>
         <p className="links"><a target="_blank" rel="noopener noreferrer" href="https://spotify-metadata.netlify.app/">
           Spotify Metadata
-        </a>, and</p>
+        </a>, a site for checking out your listening habits, and</p>
         <p className="links"><a target="_blank" rel="noopener noreferrer" href="https://mix-master.netlify.app/">
           Mix Master
-        </a>.</p>
+        </a>, a site to help you build better playlists and mixes.</p>
 
         <br/>
 
